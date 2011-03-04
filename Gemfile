@@ -12,3 +12,5 @@ end
 gem 'bcrypt-ruby',:require => "bcrypt"
 gem 'mocha'
 gem 'nifty-generators'
+gem 'dynamic_form'
+gem 'simple_form'

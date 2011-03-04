@@ -1,14 +1,194 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ajaxedit</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag 'jquery','jeditable', 'application' %>
-  <%= csrf_meta_tag %>
+	<title>Ajaxedit</title>
+	<%= stylesheet_link_tag :all %>
+	<%= javascript_include_tag 'jquery','jeditable','jquery.fullscreenr','jquery.jWidths_v2', 'application' %>
+	<%= csrf_meta_tag %>
+	<link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var FullscreenrOptions = {  width: 1920, height: 1200, bgID: '#bgimg' };
+			jQuery.fn.fullscreenr(FullscreenrOptions);
+			$('.content_2').jWidths({
+					'def_columns': '2',
+					'def_margin': '10',
+					'def_border': '0',
+					'ItemSelector': 'div'
+				});
+
+			$(window).resize(function(){
+				$('.content_2').jWidths({
+					'def_columns': '2',
+					'def_margin': '10',
+					'def_border': '0',
+					'ItemSelector': 'div'
+				});
+			});
+		});
+	</script>
+	<style>
+	body {
+		overflow:hidden; 
+		padding:0;margin:0;
+		height:100%;width:100%;
+	}
+	#bgimg {
+		position:absolute;
+		z-index: -1;
+	}
+	#realBody{
+		position:absolute;
+		z-index: 5;	
+		overflow:auto; 
+		height:100%;width:100%;
+		background:rgba(10,10,10,.5);
+		color:#ddd; 
+	}
+	.header {
+		width:100% ;
+		margin-top:0px; 
+		margin-bottom:10px;  
+		float:left ; 
+		clear: both;
+		background:rgba(10,10,10,.7);
+	}
+	.footer {
+		width:100% ;
+		
+		margin-top:100px; 
+		margin-bottom:0px;  
+		float:center ; 
+		clear: both;
+		background:rgba(10,10,10,.7);
+	}
+	h1 {
+		font-family: 'Arvo', Georgia, Times, serif;
+		font-size: 59px;
+		line-height: 70px;
+		text-shadow: 1px 1px 1px #aaa;
+	}
+	p {
+		font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+		font-size: 16px;
+		line-height: 25px;
+		padding:10px; 
+	}
+	.top_bar {
+	width:95%;
+	height:12%; 
+	clear: both;
+	margin:0 auto;  
+	}
+	.title{
+		clear: none;
+		float:left; 
+		margin-top:-30px; 
+	}
+	.logon {
+		clear: right;
+		float: right; 
+		margin-top:10px;
+		margin-right:10px;
+		padding:5px;
+		background:rgba(0,0,0,.15) ;
+		_border: 1px solid #000;   
+	}
+	.title .title_info {
+		padding-left:55px;
+		font-weight:bold;  
+		clear: both;
+		margin-top:-35px; 
+		letter-spacing:0.3em;
+		color:#ccc;
+	}
+	.content_main {
+		width:95%;
+		margin:auto;
+		background:rgba(0,0,0,.15) ;
+	}
+	.content_1 {
+		margin: 20px 10px; 
+		clear: both;
+		float:left; 
+
+		background:rgba(0,0,0,.15) ;
+		_border: 1px solid #000;
+	}
+	.content_2 {
+		width:100%;
+		margin: 10px auto; 
+		clear: both;
+		float:left; 
+		_background:rgba(0,0,0,.15) ;
+		_border: 1px solid #000;
+	}
+	.cont_21,.cont_22 {
+		clear:none;
+		float:left ; 
+		background:rgba(0,0,0,.15) ; 
+	}
+	/*LINKS
+	-------------------------------------------------------- */
+	a:link {color:#FF0000;}    /* unvisited link */
+	a:visited {color:#00FF00;} /* visited link */
+	_a:hover {color:#FF00FF;}   /* mouse over link */
+	a:active {color:#0000FF;}  /* selected link */
+	div a{
+		color:#000;
+	}
+	div a:hover{
+		text-decoration:none;
+	}
+	p a{
+		color:#000;
+	}
+	p a:hover{
+		text-decoration:none;
+	}
+	h1 a{
+		color:#000;
+	}
+	h1 a:hover{
+		text-decoration:none;
+	}
+	li a{
+		color:#000;
+	}
+	li a:hover{
+		text-decoration:none;
+	}
+	</style>
 </head>
 <body>
 
-<%= yield %>
+	<img id="bgimg" src="/images/wallpaper_1.jpg" width="1920" height="1200" alt="testing" /> 
+	<div id="realBody">
+		<div class="header">
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec leo arcu, iaculis at, ultricies et, porta eget, urna. Nulla facilisi. Praesent ac risus at nulla fermentum condimentum. Integer odio massa, vulputate id, suscipit non, mattis sed, nibh. Suspendisse sollicitudin egestas nunc. Proin non risus. </p>
+		</div>
+		<div class="top_bar">
+			<div class="title">
+				<h1>LoremIpsum</h1><div class="title_info">Lorem eh ipsum</div>
+			</div>
+			<div class="logon">
+				<% if logged_in? %>
+					 Welcome <%= link_to current_user.username, edit_current_user_path %> |
+					 <%= link_to "Log out", logout_path %>
+				 <% else %>
+					 <%= link_to "Sign up", signup_path %> |
+					 <%= link_to "Log in", login_path %>
+				 <% end %>
+			</div>
+		</div>
 
+		<div class="content_main">
+			<%= yield %>
+		</div>
+		<div class="footer">
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec leo arcu, iaculis at, ultricies et, porta eget, urna. Nulla facilisi. Praesent ac risus at nulla fermentum condimentum. Integer odio massa, vulputate id, suscipit non, mattis sed, nibh. Suspendisse sollicitudin egestas nunc. Proin non risus. </p>
+		</div>
+	</div>
 </body>
 </html>

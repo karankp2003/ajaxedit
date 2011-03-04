@@ -14,5 +14,5 @@ Ajaxedit::Application.routes.draw do
   resources :oceans
   match 'oceans/show.js' => 'oceans#update'
 
-   root :to => "users#new"
+   root :to => "oceans#index"
 end
