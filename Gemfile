@@ -9,6 +9,6 @@ group :development, :test do
 	gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby',:require => "bcrypt"
 gem 'mocha'
 gem 'nifty-generators'
